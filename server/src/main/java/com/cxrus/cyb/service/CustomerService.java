@@ -15,9 +15,14 @@ public class CustomerService {
 
   private final CustomerRepository customerRepository;
 
-  public CustomerService(CustomerRepository customerRepository, CustomerRepository customerRepository1) {
-    this.customerRepository = customerRepository1;
+  public CustomerService(CustomerRepository customerRepository) {
+    this.customerRepository = customerRepository;
   }
+
+  public CustomerEntity getCustomerById(int id) {
+    return null;
+  }
+
   public List<CustomerEntity> getCustomers() {
     return null;
   }

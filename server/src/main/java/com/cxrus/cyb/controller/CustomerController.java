@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cxrus.cyb.service.CustomerService;
 import  com.cxrus.cyb.entity.CustomerEntity;
 
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 @RestController
 public class CustomerController {
 
@@ -21,6 +21,11 @@ public class CustomerController {
 
   public CustomerController(CustomerService customerService) {
     this.customerService = customerService;
+  }
+
+  @GetMapping("/{id}")
+  public CustomerEntity getCustomerById(Integer id) {
+    return customerService.getCustomerById(id);
   }
 
   @GetMapping("/")
