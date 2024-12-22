@@ -1,0 +1,17 @@
+1) Customer Name do not have single order
+SELECT companyName FROM customers WHERE customerId NOT IN (SELECT DISTINCT(customerId) FROM orders)
+
+2) select distinct( CompanyName) from customers 
+where customerId in (
+select customerId from orders where orderid in (
+select orderID from orderdetails where productId in
+(select productid from products where ProductName like '%Lager%') )
+) order by companyName asc
+
+3) SELECT _ord.CustomerID, _prod.ProductName, _ordDet.Quantity 
+FROM OrderDetails _ordDet
+INNER JOIN Orders _ord on
+_ord.OrderId = _ordDet.OrderId 
+inner join Products _prod on
+_prod.ProductID = _ordDet.ProductID
+order by _ord.CustomerID asc, _prod.ProductName asc
