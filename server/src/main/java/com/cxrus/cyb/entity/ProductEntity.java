@@ -1,9 +1,6 @@
 package com.cxrus.cyb.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -11,16 +8,16 @@ import lombok.Data;
 @Table(name = "products")
 @Data
 public class ProductEntity {
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer productId;
   private String productName;
   private Integer supplierId;
   private Integer categoryId;
-  private Integer quantityPerUnit;
+  private String quantityPerUnit;
   private Float unitPrice;
   private Integer unitsInStock;
   private Integer unitsOnOrder;
   private Integer reorderLevel;
   private Integer discontinued;
-  private String shipCountry;
 }

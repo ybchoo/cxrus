@@ -1,18 +1,20 @@
 package com.cxrus.cyb.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "orderdetails")
 @Data
 public class OrderdetailEntity {
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer orderDetailId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
   private Integer orderId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
   private Integer productId;
   private Float unitPrice;
   private Integer quantity;

@@ -1,9 +1,6 @@
 package com.cxrus.cyb.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import lombok.Data;
 
@@ -13,7 +10,7 @@ import lombok.Data;
 public class CustomerEntity {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer customerId;
   private String companyName;
   private String contactName;
@@ -21,9 +18,9 @@ public class CustomerEntity {
   private String address;
   private String city;
   private String region;
-  private Integer postalCode;
+  private String postalCode;
   private String country;
-  private Integer phone;
-  private Integer fax;
+  private String phone;
+  private String fax;
 
 }

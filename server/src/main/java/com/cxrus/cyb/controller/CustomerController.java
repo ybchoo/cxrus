@@ -27,4 +27,9 @@ public class CustomerController {
   public List<CustomerEntity> getCustomers() {
     return customerService.getCustomers();
   }
+
+  @GetMapping("/topten")
+  public List<CustomerEntity> getTopTenCustomers() {
+    return customerService.getCustomers();
+  }
 }

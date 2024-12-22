@@ -1,8 +1,5 @@
 package com.cxrus.cyb.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,19 +10,23 @@ import lombok.Data;
 @Data
 
 public class OrderEntity {
-  @Id @GeneratedValue
-  private Long customerId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer orderId;
+
+  @OneToOne(mappedBy = "match", fetch = FetchType.LAZY)
+  private String customerId;
+
   private Integer employeeId;
   private LocalDate orderDate;
   private LocalDate requiredDate;
   private LocalDate shippedDate;
-  private String shipVia;
-  private String freight;
+  private Integer shipVia;
+  private Float freight;
   private String shipName;
   private String shipAddress;
   private String shipCity;
   private String shipRegion;
-  private Integer shipPostalCode;
+  private String shipPostalCode;
   private String shipCountry;
 }

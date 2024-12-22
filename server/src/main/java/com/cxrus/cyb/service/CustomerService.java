@@ -22,4 +22,8 @@ public class CustomerService {
     return null;
   }
 
+  public List<CustomerEntity> getTopTenCustomers() {
+    return null;
+  }
+
 }
