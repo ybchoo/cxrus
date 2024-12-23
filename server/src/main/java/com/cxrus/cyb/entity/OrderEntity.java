@@ -2,6 +2,8 @@ package com.cxrus.cyb.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
 import lombok.Data;
 
 @Entity
@@ -77,4 +79,26 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    OrderEntity that = (OrderEntity) o;
+    return Objects.equals(orderId, that.orderId) && Objects.equals(customerId, that.customerId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipperId, that.shipperId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(orderId, customerId, employeeId, orderDate, shipperId);
+  }
+
+  @Override
+  public String toString() {
+    return "OrderEntity{" +
+        "orderId=" + orderId +
+        ", customerId=" + customerId +
+        ", employeeId=" + employeeId +
+        ", orderDate=" + orderDate +
+        ", shipperId=" + shipperId +
+        '}';
+  }
 }

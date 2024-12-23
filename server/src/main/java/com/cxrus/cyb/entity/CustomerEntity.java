@@ -2,9 +2,11 @@ package com.cxrus.cyb.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 
 @Entity
-@Table(name="customers")
+@Table(name = "customers")
 public class CustomerEntity {
 
   @Id
@@ -98,5 +100,29 @@ public class CustomerEntity {
   private String city;
 
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass())
+      return false;
+    CustomerEntity that = (CustomerEntity) o;
+    return Objects.equals(customerID, that.customerID) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country) && Objects.equals(customerName, that.customerName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city);
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(customerID, postalCode, country, customerName, contactName, address, city);
+  }
+
+  @Override
+  public String toString() {
+    return "CustomerEntity{" +
+        "customerID=" + customerID +
+        ", postalCode='" + postalCode + '\'' +
+        ", country='" + country + '\'' +
+        ", customerName='" + customerName + '\'' +
+        ", contactName='" + contactName + '\'' +
+        ", address='" + address + '\'' +
+        ", city='" + city + '\'' +
+        '}';
+  }
 }

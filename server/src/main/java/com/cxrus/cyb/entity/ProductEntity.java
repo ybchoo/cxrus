@@ -3,6 +3,8 @@ package com.cxrus.cyb.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "products")
@@ -126,5 +128,33 @@ public class ProductEntity {
 
   public void setDiscontinued(Integer discontinued) {
     this.discontinued = discontinued;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    ProductEntity that = (ProductEntity) o;
+    return Objects.equals(productId, that.productId) && Objects.equals(productName, that.productName) && Objects.equals(supplierId, that.supplierId) && Objects.equals(categoryId, that.categoryId) && Objects.equals(quantityPerUnit, that.quantityPerUnit) && Objects.equals(unitPrice, that.unitPrice) && Objects.equals(unitsInStock, that.unitsInStock) && Objects.equals(unitsOnOrder, that.unitsOnOrder) && Objects.equals(reorderLevel, that.reorderLevel) && Objects.equals(discontinued, that.discontinued);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(productId, productName, supplierId, categoryId, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued);
+  }
+
+  @Override
+  public String toString() {
+    return "ProductEntity{" +
+        "productId=" + productId +
+        ", productName='" + productName + '\'' +
+        ", supplierId=" + supplierId +
+        ", categoryId=" + categoryId +
+        ", quantityPerUnit='" + quantityPerUnit + '\'' +
+        ", unitPrice=" + unitPrice +
+        ", unitsInStock=" + unitsInStock +
+        ", unitsOnOrder=" + unitsOnOrder +
+        ", reorderLevel=" + reorderLevel +
+        ", discontinued=" + discontinued +
+        '}';
   }
 }
