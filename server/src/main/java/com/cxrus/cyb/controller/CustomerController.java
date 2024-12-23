@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/customers")
+
 @ResponseBody
 public class CustomerController {
   protected static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
@@ -31,8 +31,7 @@ public class CustomerController {
     this.customerRepository = customerRepository;
     this.customerService = customerService;
   }
-
-  @GetMapping("/{id}")
+  @GetMapping("/customers/{id}")
   @ResponseStatus(code = HttpStatus.OK)
   public CustomerEntity getCustomerById(Integer id) {
     System.out.println("Inside getCustomerById");
@@ -40,7 +39,7 @@ public class CustomerController {
     return customerService.getCustomerById(id);
   }
 
-  @GetMapping("/")
+  @GetMapping("/customers")
   @ResponseStatus(code = HttpStatus.OK)
   public List<CustomerEntity> getCustomers() {
     logger.info("Inside getCustomers");
@@ -48,7 +47,7 @@ public class CustomerController {
     return customerService.getCustomers();
   }
 
-  @GetMapping("/topten")
+  @GetMapping("/customers/topten")
   @ResponseStatus(code = HttpStatus.OK)
   public List<CustomerEntity> getTopTenCustomers() {
     logger.info("Inside getTopTenCustomers");

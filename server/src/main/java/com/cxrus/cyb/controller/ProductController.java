@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/products")
 @RestController
 public class ProductController {
   protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 //  @Autowired
 //  private final ProductRepository productRepository;
+
+
 
   @Autowired
   private final ProductService productService;
@@ -27,24 +28,26 @@ public class ProductController {
     this.productService = productService;
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/products/{id}")
   public ProductEntity getProductById(Integer id) {
     logger.info("Inside getProductById");
     System.out.println("Inside getProductById");
     return productService.getProductById(id);
   }
 
-  @GetMapping("/")
+  @GetMapping("/products")
   public List<ProductEntity> getProducts() {
     logger.info("Inside getProducts");
     System.out.println("Inside getProducts");
     return productService.getProducts();
   }
 
-  @GetMapping("/top-ten")
+  @GetMapping("/products/top-ten")
   public List<ProductEntity> getTopTenProducts() {
     logger.info("Inside getTopTenProducts");
     System.out.println("Inside getTopTenProducts");
     return productService.getProducts();
   }
+
+
 }

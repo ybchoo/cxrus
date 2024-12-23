@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("/orders")
 @RestController
 @ResponseBody
 public class OrderController {
@@ -31,8 +30,7 @@ public class OrderController {
     this.orderRepository = orderRepository;
     this.orderService = orderService;
   }
-
-  @GetMapping("/{id}")
+  @GetMapping("/orders/{id}")
   @ResponseStatus(code = HttpStatus.OK)
   public OrderEntity getOrderById(Integer id) {
     logger.info("Inside getOrderById");
@@ -40,7 +38,7 @@ public class OrderController {
     return orderService.getOrderById(id);
   }
 
-  @GetMapping("/")
+  @GetMapping("/orders")
   @ResponseStatus(code = HttpStatus.OK)
   public List<OrderEntity> getOrders() {
     logger.info("Inside getOrders");
