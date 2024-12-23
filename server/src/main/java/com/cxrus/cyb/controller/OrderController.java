@@ -8,7 +8,6 @@ import com.cxrus.cyb.entity.ProductEntity;
 import com.cxrus.cyb.repositories.OrderRepository;
 import com.cxrus.cyb.service.OrderService;
 import com.cxrus.cyb.service.ProductService;
-import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +34,16 @@ public class OrderController {
 
   @GetMapping("/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  @Operation(summary = "Get Order By ID")
   public OrderEntity getOrderById(Integer id) {
+    logger.info("Inside getOrderById");
     System.out.println("Inside getOrderById");
     return orderService.getOrderById(id);
   }
 
   @GetMapping("/")
   @ResponseStatus(code = HttpStatus.OK)
-  @Operation(summary = "Get All Orders")
   public List<OrderEntity> getOrders() {
+    logger.info("Inside getOrders");
     System.out.println("Inside getOrders");
     return orderService.getOrders();
   }

@@ -8,7 +8,6 @@ import com.cxrus.cyb.service.OrderService;
 
 import com.cxrus.cyb.service.CustomerService;
 import com.cxrus.cyb.entity.CustomerEntity;
-import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,24 +34,24 @@ public class CustomerController {
 
   @GetMapping("/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  @Operation(summary = "Get Customer By ID")
   public CustomerEntity getCustomerById(Integer id) {
     System.out.println("Inside getCustomerById");
+    logger.info("Inside getCustomerById");
     return customerService.getCustomerById(id);
   }
 
   @GetMapping("/")
   @ResponseStatus(code = HttpStatus.OK)
-  @Operation(summary = "Provide All Books")
   public List<CustomerEntity> getCustomers() {
+    logger.info("Inside getCustomers");
     System.out.println("Inside getCustomers");
     return customerService.getCustomers();
   }
 
   @GetMapping("/topten")
   @ResponseStatus(code = HttpStatus.OK)
-  @Operation(summary = "Get Top Ten Customer")
   public List<CustomerEntity> getTopTenCustomers() {
+    logger.info("Inside getTopTenCustomers");
     System.out.println("Inside getTopTenCustomers");
     return customerService.getCustomers();
   }
