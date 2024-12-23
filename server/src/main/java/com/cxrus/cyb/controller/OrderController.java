@@ -32,7 +32,7 @@ public class OrderController {
   }
   @GetMapping("/orders/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  public OrderEntity getOrderById(Integer id) {
+  public Optional<OrderEntity> getOrderById(Integer id) {
     logger.info("Inside getOrderById");
     System.out.println("Inside getOrderById");
     return orderService.getOrderById(id);

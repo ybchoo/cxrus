@@ -33,7 +33,7 @@ public class CustomerController {
   }
   @GetMapping("/customers/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  public CustomerEntity getCustomerById(Integer id) {
+  public Optional<CustomerEntity> getCustomerById(Integer id) {
     System.out.println("Inside getCustomerById");
     logger.info("Inside getCustomerById");
     return customerService.getCustomerById(id);

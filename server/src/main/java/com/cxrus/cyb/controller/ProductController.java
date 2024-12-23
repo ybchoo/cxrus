@@ -1,5 +1,6 @@
 package com.cxrus.cyb.controller;
 import java.util.List;
+import java.util.Optional;
 
 
 import com.cxrus.cyb.entity.ProductEntity;
@@ -18,8 +19,6 @@ public class ProductController {
 //  @Autowired
 //  private final ProductRepository productRepository;
 
-
-
   @Autowired
   private final ProductService productService;
 
@@ -29,7 +28,7 @@ public class ProductController {
   }
 
   @GetMapping("/products/{id}")
-  public ProductEntity getProductById(Integer id) {
+  public Optional<ProductEntity> getProductById(Integer id) {
     logger.info("Inside getProductById");
     System.out.println("Inside getProductById");
     return productService.getProductById(id);
