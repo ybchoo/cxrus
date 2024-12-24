@@ -3,15 +3,19 @@ import java.util.List;
 import java.util.Optional;
 
 
+import com.cxrus.cyb.entity.CustomerEntity;
 import com.cxrus.cyb.entity.ProductEntity;
+import com.cxrus.cyb.exception.CustomerIdExistException;
+import com.cxrus.cyb.exception.ProductIdExistException;
+import com.cxrus.cyb.exception.handler.HandlerException;
 import com.cxrus.cyb.repositories.ProductRepository;
 import com.cxrus.cyb.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 public class ProductController {
@@ -27,11 +31,12 @@ public class ProductController {
     this.productService = productService;
   }
 
-  @GetMapping("/products/{id}")
-  public Optional<ProductEntity> getProductById(Integer id) {
-    logger.info("Inside getProductById");
-    System.out.println("Inside getProductById");
-    return productService.getProductById(id);
+  @GetMapping("/product/{id}")
+  public ResponseEntity getProductById(@PathVariable Long id) {
+    logger.info("============Inside getProductById  [[["+id+"]]");
+    System.out.println("===========Inside getProductById");
+    Optional<ProductEntity> _product = productService.getProductById(id);
+    return ResponseEntity.ok( _product );
   }
 
   @GetMapping("/products")
@@ -42,11 +47,47 @@ public class ProductController {
   }
 
   @GetMapping("/products/top-ten")
+
   public List<ProductEntity> getTopTenProducts() {
-    logger.info("Inside getTopTenProducts");
-    System.out.println("Inside getTopTenProducts");
-    return productService.getProducts();
+    logger.info("========== Inside getTopTenProducts");
+    System.out.println("========== Inside getTopTenProducts");
+    List<ProductEntity> _productList =
+        productService.getTopTenProducts();
+
+    return _productList;
   }
 
+  @PostMapping("/product")
+  @ResponseBody
+  public ResponseEntity saveProduct(@RequestBody ProductEntity productEntity) {
+    return ResponseEntity.ok(productService.saveProduct(productEntity));
+  }
 
+  @PutMapping("/product")
+  @ResponseStatus( code = HttpStatus.NO_CONTENT )
+  @ResponseBody
+  public ResponseEntity updateProduct(
+      @RequestBody ProductEntity productEntity) {
+
+
+    ProductEntity _product =
+        productService.findByProductId( productEntity.getProductId() );
+    System.out.println("Product Id   [["+productEntity.getProductId()+"]]");
+    System.out.println("Product Size   [["+_product.getProductId()+"]]");
+
+    _product.setProductName(productEntity.getProductName());
+    _product.setCategoryId(productEntity.getCategoryId());
+    _product.setDiscontinued(productEntity.getDiscontinued());
+    _product.setQuantityPerUnit(productEntity.getQuantityPerUnit());
+    _product.setReorderLevel(productEntity.getReorderLevel());
+    _product.setSupplierId(productEntity.getSupplierId());
+    _product.setUnitPrice(productEntity.getUnitPrice());
+    _product.setUnitsInStock(productEntity.getUnitsInStock());
+    _product.setUnitsOnOrder(productEntity.getUnitsOnOrder());
+    return ResponseEntity.ok(productService.updateProduct(_product));
+  }
+  @DeleteMapping("/product/{id}")
+  public String deleteProduct(@PathVariable int id) {
+    return productService.deleteProduct(id);
+  }
 }

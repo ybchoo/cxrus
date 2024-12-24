@@ -10,8 +10,8 @@ import java.util.Objects;
 @Table(name = "products")
 
 public class ProductEntity {
-  @Id
 //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long productId;
 
@@ -40,7 +40,12 @@ public class ProductEntity {
 
   public ProductEntity(){}
 
-  public ProductEntity(Float unitPrice, String quantityPerUnit, Integer categoryId, Integer supplierId, String productName, Long productId) {
+  public ProductEntity(Float unitPrice,
+                       String quantityPerUnit,
+                       Integer categoryId,
+                       Integer supplierId,
+                       String productName,
+                       Long productId) {
     this.unitPrice = unitPrice;
     this.quantityPerUnit = quantityPerUnit;
     this.categoryId = categoryId;
@@ -48,7 +53,6 @@ public class ProductEntity {
     this.productName = productName;
     this.productId = productId;
   }
-
 
   public Long getProductId() {
     return productId;

@@ -17,4 +17,8 @@ import java.util.Set;
 @Repository
 @Qualifier("customers")
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer>{
+
+  @Query(value = "SELECT * FROM  cxrus.customers LIMIT 0, 10;", nativeQuery = true)
+  Optional<List<CustomerEntity>> getTopTenCustomers();
+
 }

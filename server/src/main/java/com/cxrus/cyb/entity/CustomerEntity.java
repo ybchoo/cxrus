@@ -9,19 +9,20 @@ import java.util.Objects;
 @Table(name = "customers")
 public class CustomerEntity {
 
-  @Id
+
 //  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @GeneratedValue(strategy = GenerationType.AUTO)
-
-  private Integer customerID;
+  @Id
+  private Long customerID;
 
   @Column(name = "PostalCode")
   private String postalCode;
 
   @Column(name = "Country")
   private String country;
+  public CustomerEntity(){}
 
-  public CustomerEntity(Integer customerID, String customerName, String contactName, String address, String city, String postalCode, String country) {
+  public CustomerEntity(Long customerID, String customerName, String contactName, String address, String city, String postalCode, String country) {
     this.customerID = customerID;
     this.customerName = customerName;
     this.contactName = contactName;
@@ -31,11 +32,11 @@ public class CustomerEntity {
     this.country = country;
   }
 
-  public Integer getCustomerID() {
+  public Long getCustomerID() {
     return customerID;
   }
 
-  public void setCustomerID(Integer customerID) {
+  public void setCustomerID(Long customerID) {
     this.customerID = customerID;
   }
 

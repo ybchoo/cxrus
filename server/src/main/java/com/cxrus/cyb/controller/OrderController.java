@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@ResponseBody
 public class OrderController {
   protected static final Logger logger = LoggerFactory.getLogger(OrderController.class);
   @Autowired
@@ -30,11 +29,14 @@ public class OrderController {
     this.orderRepository = orderRepository;
     this.orderService = orderService;
   }
-  @GetMapping("/orders/{id}")
+
+  @GetMapping("/order/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  public Optional<OrderEntity> getOrderById(Integer id) {
-    logger.info("Inside getOrderById");
-    System.out.println("Inside getOrderById");
+  public Optional<OrderEntity> getOrderById(@PathVariable Long id) {
+    logger.info("=========== Inside getOrderById =========== ");
+    System.out.println("=========== Inside getOrderById =========== ");
+    Optional<OrderEntity> _a = orderService.getOrderById(id);
+    System.out.println("=========== [[" +_a.isEmpty() +"]] =========== ");
     return orderService.getOrderById(id);
   }
 
@@ -45,4 +47,28 @@ public class OrderController {
     System.out.println("Inside getOrders");
     return orderService.getOrders();
   }
+
+  @GetMapping("/orders/top-ten")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Optional<List<OrderEntity>> getTopTenOrders() {
+    logger.info("Inside Top Ten Orders");
+    System.out.println("Inside Top Ten Orders");
+    return orderService.getTopTenOrders();
+  }
+
+  @PostMapping("/orders")
+  public OrderEntity saveProduct(@RequestBody OrderEntity orderEntity) {
+    return orderService.saveProduct(orderEntity);
+  }
+
+  @PutMapping("/order")
+  public String updateOrder(@RequestBody OrderEntity orderEntity) {
+    return orderService.updateProduct(orderEntity);
+  }
+
+  @DeleteMapping("/order/{id}")
+  public String deleteOrder(@PathVariable int id) {
+    return orderService.deleteOrder(id);
+  }
+
 }

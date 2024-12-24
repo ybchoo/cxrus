@@ -9,10 +9,10 @@ import lombok.Data;
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
-  @Id
 //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer orderId;
+  private Long orderId;
 
 //  @OneToOne(mappedBy = "match", fetch = FetchType.LAZY)
 
@@ -28,7 +28,7 @@ public class OrderEntity {
   @Column(name = "ShipperID")
   private Integer shipperId;
 
-  public OrderEntity(Integer orderId, Integer customerId, Integer employeeId, LocalDate orderDate, Integer shipperId) {
+  public OrderEntity(Long orderId, Integer customerId, Integer employeeId, LocalDate orderDate, Integer shipperId) {
     this.orderId = orderId;
     this.customerId = customerId;
     this.employeeId = employeeId;
@@ -39,11 +39,11 @@ public class OrderEntity {
   public OrderEntity() {
   }
 
-  public Integer getOrderId() {
+  public Long getOrderId() {
     return orderId;
   }
 
-  public void setOrderId(Integer orderId) {
+  public void setOrderId(Long orderId) {
     this.orderId = orderId;
   }
 
