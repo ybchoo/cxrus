@@ -1,5 +1,5 @@
 {
-  "name": "cxrustest",
+  "name": "@tanstack/query-example-react-router",
   "private": true,
   "type": "module",
   "scripts": {

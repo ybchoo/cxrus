@@ -8,14 +8,14 @@ import './index.css'
 
 import ErrorPage from './error-page'
 import Root, { loader as rootLoader } from './routes/root'
-import Contact, {
+import Product, {
   loader as contactLoader,
   action as contactAction,
-} from './routes/contact'
-import EditContact, { action as editAction } from './routes/edit'
+} from './routes/product/product'
+import EditProduct, { action as editAction } from './routes/product/edit'
 import { action as destroyAction } from './routes/destroy'
 import Index from './routes/index'
-import NewContact, { action as newAction } from './routes/new'
+import NewProduct, { action as newAction } from './routes/product/new'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,28 +37,28 @@ const router = createBrowserRouter([
         element: <Index />,
       },
       {
-        path: 'contacts/new',
-        element: <NewContact />,
+        path: 'products/new',
+        element: <NewProduct />,
         action: newAction(queryClient),
         errorElement: <ErrorPage />,
       },
       {
-        path: 'contacts/:contactId',
-        element: <Contact />,
+        path: 'products/:contactId',
+        element: <Product />,
         loader: contactLoader(queryClient),
         action: contactAction(queryClient),
         errorElement: <ErrorPage />,
       },
       {
-        path: 'contacts/:contactId/edit',
-        element: <EditContact />,
+        path: 'products/:contactId/edit',
+        element: <EditProduct />,
         loader: contactLoader(queryClient),
         action: editAction(queryClient),
         errorElement: <ErrorPage />,
       },
       {
-        path: 'contacts/:contactId/destroy',
-        element: <EditContact />,
+        path: 'products/:contactId/destroy',
+        element: <EditProduct />,
         action: destroyAction(queryClient),
         errorElement: <ErrorPage />,
       },
