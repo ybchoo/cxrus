@@ -13,9 +13,18 @@ import Product, {
   action as contactAction,
 } from './routes/product/product'
 import EditProduct, { action as editAction } from './routes/product/edit'
+import NewProduct, { action as newAction } from './routes/product/new'
+
+
+import Customer, {
+  loader as customerLoader,
+  action as customerAction,
+} from './routes/customer/customer'
+import EditCustomer, { action as editAction } from './routes/customer/edit'
+import NewCustomer, { action as newAction } from './routes/customer/new'
+
 import { action as destroyAction } from './routes/destroy'
 import Index from './routes/index'
-import NewProduct, { action as newAction } from './routes/product/new'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,21 +52,21 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: 'products/:contactId',
+        path: 'products/:productId',
         element: <Product />,
         loader: contactLoader(queryClient),
         action: contactAction(queryClient),
         errorElement: <ErrorPage />,
       },
       {
-        path: 'products/:contactId/edit',
+        path: 'products/:productId/edit',
         element: <EditProduct />,
         loader: contactLoader(queryClient),
         action: editAction(queryClient),
         errorElement: <ErrorPage />,
       },
       {
-        path: 'products/:contactId/destroy',
+        path: 'products/:productId/destroy',
         element: <EditProduct />,
         action: destroyAction(queryClient),
         errorElement: <ErrorPage />,
@@ -69,9 +78,10 @@ const router = createBrowserRouter([
 const rootElement = document.getElementById('root')
 ReactDOM.createRoot(rootElement!).render(
   <React.StrictMode>
+    
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools buttonPosition="bottom-right" />
+       <RouterProvider router={router} />
+       <ReactQueryDevtools buttonPosition="bottom-right" />
     </QueryClientProvider>
   </React.StrictMode>,
 )

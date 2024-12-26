@@ -45,7 +45,7 @@ export default function Root() {
  return (
   <>
    <div id="sidebar">
-    <h1>React Router Products</h1>
+    <h2>React Router Products 2</h2>
     <div>
      <form id="search-form" role="search">
       <input
@@ -79,9 +79,9 @@ export default function Root() {
            isActive ? 'active' : isPending ? 'pending' : ''
           }
          >
-          {product.productName  ? (
+          {product.product_name ? (
            <>
-            {product.productName}
+            {product.product_name}
            </>
           ) : (
            <i>No Product Name</i>
