@@ -13,7 +13,11 @@ import {
  useSuspenseQuery,
 } from '@tanstack/react-query'
 import { getProducts } from '../data/products'
+import { getCustomers } from '../data/customers'
+
+
 import type { QueryClient } from '@tanstack/react-query'
+
 import type { LoaderFunctionArgs } from 'react-router-dom'
 
 const productListQuery = (q?: string) =>
@@ -21,6 +25,13 @@ const productListQuery = (q?: string) =>
   queryKey: ['products', 'list', q ?? 'all'],
   queryFn: () => getProducts(q),
  })
+ 
+const customerListQuery = (q?: string) =>
+ queryOptions({
+  queryKey: ['customers', 'list', q ?? 'all'],
+  queryFn: () => getCustomers(q),
+ }) 
+ 
 
 export const loader =
  (queryClient: QueryClient) =>
@@ -28,6 +39,7 @@ export const loader =
   const url = new URL(request.url)
   const q = url.searchParams.get('q') ?? ''
   await queryClient.ensureQueryData(productListQuery(q))
+  await queryClient.ensureQueryData(customerListQuery(q))
   return { q }
  }
 
@@ -36,7 +48,11 @@ export default function Root() {
   ReturnType<ReturnType<typeof loader>>
  >
  const { data: products } = useSuspenseQuery(productListQuery(q))
+ const { data: customers } = useSuspenseQuery(customerListQuery(q))
+ 
  const searching = useIsFetching({ queryKey: ['products', 'list'] }) > 0
+ const customersearching = useIsFetching({ queryKey: ['customers', 'list'] }) > 0 
+ 
  const navigation = useNavigation()
  const submit = useSubmit()
 
@@ -45,6 +61,8 @@ export default function Root() {
  return (
   <>
    <div id="sidebar">
+   
+   
     <h2>Products</h2>
     <div>
      <form id="search-form" role="search">
@@ -69,6 +87,7 @@ export default function Root() {
       New
      </Link>
     </div>
+    
     <nav>
      {products.length ? (
       <ul>
@@ -97,6 +116,8 @@ export default function Root() {
       </p>
      )}
     </nav>
+    
+    
    </div>
    <div
     id="detail"
