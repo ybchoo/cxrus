@@ -65,7 +65,7 @@ export default function customer() {
 
   return (
     <div id="customer">
-      <b>customer Name customer</b><br />
+      <b>Customer Name customer</b><br />
       <b>customer ID</b><br />
       <input placeholder="Enter customer Id"
         aria-label="customer Id" type="text"
