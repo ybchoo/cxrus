@@ -40,6 +40,7 @@ export const action =
   (queryClient: QueryClient) =>
   async ({ request, params }: ActionFunctionArgs) => {
     let formData = await request.formData()
+    console.log("Form Data   [[["+formData+"]]")
     if (!params.productId) {
       throw new Error('No product ID provided')
     }
@@ -60,78 +61,81 @@ export default function Product() {
 
   return (
     <div id="product">
-      <div>  
-        <b>Product Name Product</b><br />
+      <b>Product Name Product</b><br />
+      <b>Product ID</b><br />
+      <input placeholder="Enter Product Id"
+        aria-label="Product Id" type="text"
+        name="productId" size="60" 
+        defaultValue={product.productId} /><br />
+      { console.dir(product) }<br />
+      <b>Product Name Product</b><br />
       <input placeholder="Enter Product Name"
         aria-label="Product Name" type="text"
         name="productName" size="60" 
-        defaultValue={product?.productName} /><br />
+        defaultValue={product.product_name} /><br />
       <b>Supplier Id</b><br />
       <input placeholder="Enter Supplier Id"
         aria-label="Supplier ID" type="text"
         name="supplierId" 
-        defaultValue={product?.supplierId} /><br />
+        defaultValue={product.supplierid} /><br />
         
       <b>Category Id</b><br />
       <input placeholder=" Enter categoryId"
         aria-label="Category ID" type="text"
         name="categoryId" size="14" 
-        defaultValue={product?.categoryId} /><br />
+        defaultValue={product.categoryid} /><br />
       
-      <b>Quantity Per Unit</b><br />
-      <input placeholder=" Enter Quantity Per Unit"
-        aria-label="Quantity Per Unit" type="text"
-        name="quantityPerUnit" size="16" 
-        defaultValue={product?.quantityPerUnit} /><br />
+      <b>Supplier Id</b><br />
+      <input placeholder="Enter Supplier Id"
+        aria-label="Supplier Id" type="text"
+        name="SupplierID" size="16" 
+        defaultValue={product.supplierid} /><br />
       
-      <b>Unit Price</b><br />
-      <input placeholder=" Enter Unit Price"
-        aria-label="unitPrice" type="text"
-        name="unitPrice" size="20" 
-        defaultValue={product?.unitPrice} /><br />
+      <b>Price</b><br />
+      <input placeholder="Enter Price"
+        aria-label="price" type="text"
+        name="price" size="20" 
+        defaultValue={product.price} /><br />
         
       <b>Units In Stock</b><br />
       <input placeholder="Enter Units In Stock"
         aria-label="unitsInStock" type="text"
         name="unitsInStock" size="18" 
-        defaultValue={product?.unitsInStock} /><br />
+        defaultValue={product.units_in_stock} /><br />
         
       <b>Units On Order</b><br />
-      <input placeholder="Enter Units In Order"
+      <input placeholder="Enter Units On Order"
         aria-label="unitsOnOrder" type="text"
         name="unitsOnOrder" size="18" 
-        defaultValue={product?.unitsOnOrder} /><br />
+        defaultValue={product.units_on_order} /><br />
       
       <b>Recorder Level</b><br />
       <input placeholder="Enter Reorder Level"
         aria-label="reorderLevel" type="text"
         name="reorderLevel" size="16" 
-        defaultValue={product?.reorderLevel} /><br />
+        defaultValue={product.reorder_level} /><br />
       
       <b>Discontinued</b><br />
       <input placeholder="Enter Discontinued"
         aria-label="discontinued" type="text"
         name="discontinued" size="10" 
-        defaultValue={product?.discontinued} /><br />
-        
-        <div>
-          <Link to="edit" className="button">
-            Edit
-          </Link>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              // eslint-disable-next-line no-restricted-globals
-              if (!confirm('Please confirm you want to delete this record.')) {
-                event.preventDefault()
-              }
-            }}
-          > 
-            <button type="submit">Delete</button>
-          </Form>
-        </div>
-      </div>
+        defaultValue={product.discontinued} /><br />
+      <br />
+      <span>
+        <Link to="edit" className="button">
+          Edit
+        </Link>
+        <Form method="post" action="destroy"
+          onSubmit={(event) => {
+            // eslint-disable-next-line no-restricted-globals
+            if (!confirm('Please confirm you want to delete this record.')) {
+              event.preventDefault()
+            }
+          }}
+        >
+          <button type="submit">Delete</button>
+        </Form>
+      </span>
     </div>
   )
 }

@@ -45,7 +45,7 @@ export default function Root() {
  return (
   <>
    <div id="sidebar">
-    <h2>React Router Products 2</h2>
+    <h2>Products</h2>
     <div>
      <form id="search-form" role="search">
       <input
