@@ -8,9 +8,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "customers")
 public class CustomerEntity {
-
-
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
   private Long customerID;
@@ -20,6 +17,7 @@ public class CustomerEntity {
 
   @Column(name = "Country")
   private String country;
+
   public CustomerEntity(){}
 
   public CustomerEntity(Long customerID, String customerName, String contactName, String address, String city, String postalCode, String country) {

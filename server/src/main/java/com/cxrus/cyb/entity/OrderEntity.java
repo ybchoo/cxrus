@@ -2,6 +2,8 @@ package com.cxrus.cyb.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import lombok.Data;
@@ -9,15 +11,11 @@ import lombok.Data;
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long orderId;
 
-//  @OneToOne(mappedBy = "match", fetch = FetchType.LAZY)
-
-  @Column(name = "CustomerID")
-  private Integer customerId;
+//  private Integer customerId;
 
   @Column(name = "EmployeeID")
   private Integer employeeId;
@@ -28,15 +26,29 @@ public class OrderEntity {
   @Column(name = "ShipperID")
   private Integer shipperId;
 
-  public OrderEntity(Long orderId, Integer customerId, Integer employeeId, LocalDate orderDate, Integer shipperId) {
-    this.orderId = orderId;
-    this.customerId = customerId;
+  @OneToOne(
+      fetch = FetchType.LAZY,
+      optional = false, // NOT NULL
+      cascade = CascadeType.PERSIST
+  )
+  @JoinColumn(unique = true)
+  private CustomerEntity customer;
+
+  @ManyToMany
+  @JoinTable(name = "orderdetails",
+      joinColumns = @JoinColumn(name = "OrderID"),
+      inverseJoinColumns = @JoinColumn(name = "ProductID"))
+  private List<ProductEntity> productList =
+        new ArrayList<>();
+
+  public OrderEntity() {}
+
+  public OrderEntity(CustomerEntity customer, Integer employeeId, LocalDate orderDate, Long orderId, Integer shipperId) {
+    this.customer = customer;
     this.employeeId = employeeId;
     this.orderDate = orderDate;
+    this.orderId = orderId;
     this.shipperId = shipperId;
-  }
-
-  public OrderEntity() {
   }
 
   public Long getOrderId() {
@@ -45,14 +57,6 @@ public class OrderEntity {
 
   public void setOrderId(Long orderId) {
     this.orderId = orderId;
-  }
-
-  public Integer getCustomerId() {
-    return customerId;
-  }
-
-  public void setCustomerId(Integer customerId) {
-    this.customerId = customerId;
   }
 
   public Integer getEmployeeId() {
@@ -79,26 +83,5 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) return false;
-    OrderEntity that = (OrderEntity) o;
-    return Objects.equals(orderId, that.orderId) && Objects.equals(customerId, that.customerId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipperId, that.shipperId);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(orderId, customerId, employeeId, orderDate, shipperId);
-  }
-
-  @Override
-  public String toString() {
-    return "OrderEntity{" +
-        "orderId=" + orderId +
-        ", customerId=" + customerId +
-        ", employeeId=" + employeeId +
-        ", orderDate=" + orderDate +
-        ", shipperId=" + shipperId +
-        '}';
-  }
 }

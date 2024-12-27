@@ -10,7 +10,7 @@ import java.util.Objects;
 @Table(name = "products")
 
 public class ProductEntity {
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long productId;
