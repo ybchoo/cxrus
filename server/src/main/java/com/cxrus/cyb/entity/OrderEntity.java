@@ -11,11 +11,12 @@ import lombok.Data;
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
+
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long orderId;
 
-//  private Integer customerId;
 
   @Column(name = "EmployeeID")
   private Integer employeeId;
@@ -34,6 +35,7 @@ public class OrderEntity {
   @JoinColumn(unique = true)
   private CustomerEntity customer;
 
+
   @ManyToMany
   @JoinTable(name = "orderdetails",
       joinColumns = @JoinColumn(name = "OrderID"),
@@ -48,6 +50,21 @@ public class OrderEntity {
     this.employeeId = employeeId;
     this.orderDate = orderDate;
     this.orderId = orderId;
+    this.shipperId = shipperId;
+  }
+
+  public OrderEntity(
+      CustomerEntity customer,
+      Integer employeeId,
+      LocalDate orderDate,
+      Long orderId,
+      List<ProductEntity> productList,
+      Integer shipperId) {
+    this.customer = customer;
+    this.employeeId = employeeId;
+    this.orderDate = orderDate;
+    this.orderId = orderId;
+    this.productList = productList;
     this.shipperId = shipperId;
   }
 
@@ -83,5 +100,42 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
+  public List<ProductEntity> getProductList() {
+    return productList;
+  }
 
+  public void setProductList(List<ProductEntity> productList) {
+    this.productList = productList;
+  }
+
+  public CustomerEntity getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(CustomerEntity customer) {
+    this.customer = customer;
+  }
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    OrderEntity that = (OrderEntity) o;
+    return Objects.equals(orderId, that.orderId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipperId, that.shipperId) && Objects.equals(customer, that.customer) && Objects.equals(productList, that.productList);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(orderId, employeeId, orderDate, shipperId, customer, productList);
+  }
+
+  @Override
+  public String toString() {
+    return "OrderEntity{" +
+        "customer=" + customer +
+        ", orderId=" + orderId +
+        ", employeeId=" + employeeId +
+        ", orderDate=" + orderDate +
+        ", shipperId=" + shipperId +
+        ", productList=" + productList +
+        '}';
+  }
 }

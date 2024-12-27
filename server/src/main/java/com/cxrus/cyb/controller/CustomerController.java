@@ -44,33 +44,42 @@ public class CustomerController {
   }
 
   @GetMapping("/customers")
-  public List<CustomerEntity> getCustomers() {
+  public ResponseEntity getCustomers() {
     logger.info("=========================");
     logger.info("Inside getCustomers");
     System.out.println("=========================");
     System.out.println("Inside getCustomers");
-    return customerService.getCustomers();
+    List<CustomerEntity> _customerList =
+        customerService.getCustomers();
+    return ResponseEntity.ok(_customerList);
   }
 
   @GetMapping("/customers/topten")
-  public List<CustomerEntity> getTopTenCustomers() {
+  public ResponseEntity getTopTenCustomers() {
     logger.info("Inside getTopTenCustomers");
     System.out.println("Inside getTopTenCustomers");
-    return customerService.getCustomers();
+    List<CustomerEntity> _customerList =
+        customerService.getCustomers();
+    return ResponseEntity.ok(_customerList);
   }
 
   @PostMapping("/customer")
-  public CustomerEntity saveProduct(@RequestBody CustomerEntity customerEntity) {
-    return customerService.saveProduct(customerEntity);
+  public ResponseEntity  saveProduct(@RequestBody CustomerEntity customerEntity) {
+    CustomerEntity _customer =
+        customerService.saveProduct(customerEntity);
+    return ResponseEntity.ok(_customer);
   }
 
   @PutMapping("/customer")
-  public String updateCustomer(@RequestBody CustomerEntity customerEntity) {
-    return customerService.updateProduct(customerEntity);
+  public ResponseEntity updateCustomer(@RequestBody CustomerEntity customerEntity) {
+    String _string =
+        customerService.updateProduct(customerEntity);
+    return ResponseEntity.ok(_string);
   }
 
   @DeleteMapping("/customer/{id}")
-  public String deleteCustomer(@PathVariable int id) {
-    return customerService.deleteCustomer(id);
+  public ResponseEntity deleteCustomer(@PathVariable int id) {
+    String _string = customerService.deleteCustomer(id);
+    return ResponseEntity.ok(_string);
   }
 }

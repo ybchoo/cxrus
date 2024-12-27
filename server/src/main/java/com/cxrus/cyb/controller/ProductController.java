@@ -20,8 +20,7 @@ import org.springframework.http.ResponseEntity;
 @RestController
 public class ProductController {
   protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-//  @Autowired
-//  private final ProductRepository productRepository;
+
 
   @Autowired
   private final ProductService productService;
@@ -35,26 +34,27 @@ public class ProductController {
   public ResponseEntity getProductById(@PathVariable Long id) {
     logger.info("============Inside getProductById  [[["+id+"]]");
     System.out.println("===========Inside getProductById");
-    Optional<ProductEntity> _product = productService.getProductById(id);
+    Optional<ProductEntity> _product =
+        productService.getProductById(id);
     return ResponseEntity.ok( _product );
   }
 
   @GetMapping("/products")
-  public List<ProductEntity> getProducts() {
+  public ResponseEntity getProducts() {
     logger.info("Inside getProducts");
     System.out.println("Inside getProducts");
-    return productService.getProducts();
+    List<ProductEntity> _productList = productService.getProducts();
+    return ResponseEntity.ok(_productList);
   }
 
   @GetMapping("/products/top-ten")
 
-  public List<ProductEntity> getTopTenProducts() {
+  public ResponseEntity getTopTenProducts() {
     logger.info("========== Inside getTopTenProducts");
     System.out.println("========== Inside getTopTenProducts");
     List<ProductEntity> _productList =
         productService.getTopTenProducts();
-
-    return _productList;
+    return ResponseEntity.ok(_productList);
   }
 
   @PostMapping("/product")

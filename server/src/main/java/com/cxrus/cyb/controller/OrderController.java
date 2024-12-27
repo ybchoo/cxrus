@@ -12,63 +12,68 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class OrderController {
-  protected static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+
+  protected static final Logger logger =
+      LoggerFactory.getLogger(OrderController.class);
   @Autowired
   private final OrderService orderService;
-  @Autowired
-  private final OrderRepository orderRepository;
 
   public OrderController(
-      OrderRepository orderRepository,
       OrderService orderService) {
-    this.orderRepository = orderRepository;
     this.orderService = orderService;
   }
 
   @GetMapping("/order/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  public Optional<OrderEntity> getOrderById(@PathVariable Long id) {
+  public ResponseEntity getOrderById(@PathVariable Long id) {
     logger.info("=========== Inside getOrderById =========== ");
     System.out.println("=========== Inside getOrderById =========== ");
-    Optional<OrderEntity> _a = orderService.getOrderById(id);
-    System.out.println("=========== [[" +_a.isEmpty() +"]] =========== ");
-    return orderService.getOrderById(id);
+    Optional<OrderEntity> _order = orderService.getOrderById(id);
+    System.out.println("=========== [[" +_order.isEmpty() +"]] =========== ");
+    return ResponseEntity.ok(_order);
   }
 
   @GetMapping("/orders")
   @ResponseStatus(code = HttpStatus.OK)
-  public List<OrderEntity> getOrders() {
+  public ResponseEntity getOrders() {
     logger.info("Inside getOrders");
     System.out.println("Inside getOrders");
-    return orderService.getOrders();
+    List<OrderEntity> _orderList = orderService.getOrders();
+    return ResponseEntity.ok(_orderList);
   }
 
   @GetMapping("/orders/top-ten")
   @ResponseStatus(code = HttpStatus.OK)
-  public Optional<List<OrderEntity>> getTopTenOrders() {
+  public ResponseEntity getTopTenOrders() {
     logger.info("Inside Top Ten Orders");
     System.out.println("Inside Top Ten Orders");
-    return orderService.getTopTenOrders();
+    Optional<List<OrderEntity>> _orderList = orderService.getTopTenOrders();
+    return ResponseEntity.ok(_orderList);
   }
 
   @PostMapping("/orders")
-  public OrderEntity saveProduct(@RequestBody OrderEntity orderEntity) {
-    return orderService.saveProduct(orderEntity);
+  public ResponseEntity saveProduct(@RequestBody OrderEntity orderEntity)
+  {
+    OrderEntity _order = orderService.saveProduct(orderEntity);
+    return ResponseEntity.ok(_order);
   }
 
   @PutMapping("/order")
-  public String updateOrder(@RequestBody OrderEntity orderEntity) {
-    return orderService.updateProduct(orderEntity);
+  public ResponseEntity updateOrder(@RequestBody OrderEntity orderEntity) {
+    String _string = orderService.updateProduct(orderEntity);
+    return ResponseEntity.ok(_string);
   }
 
   @DeleteMapping("/order/{id}")
-  public String deleteOrder(@PathVariable int id) {
-    return orderService.deleteOrder(id);
+  public ResponseEntity deleteOrder(@PathVariable int id) {
+    String _string = orderService.deleteOrder(id);
+    return ResponseEntity.ok(_string);
   }
 
 }

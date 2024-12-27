@@ -22,7 +22,6 @@ public class CustomerService {
       LoggerFactory.getLogger(CustomerService.class);
   @Autowired
   private final CustomerRepository customerRepository;
-//  private final OrderRepository orderRepository;
 
   @Autowired
   public CustomerService(
@@ -35,7 +34,8 @@ public class CustomerService {
     return customerRepository.findById(id);
   }
 
-  public List<CustomerEntity> getCustomers() {
+  public List<CustomerEntity> getCustomers()
+  {
     return customerRepository.findAll();
   }
 
