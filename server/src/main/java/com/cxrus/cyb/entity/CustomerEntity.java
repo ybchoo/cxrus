@@ -12,6 +12,18 @@ public class CustomerEntity {
   @Id
   private Long customerID;
 
+  @Column(name = "CustomerName")
+  private String customerName;
+
+  @Column(name = "ContactName")
+  private String contactName;
+
+  @Column(name = "Address")
+  private String address;
+
+  @Column(name = "City")
+  private String city;
+
   @Column(name = "PostalCode")
   private String postalCode;
 
@@ -85,19 +97,6 @@ public class CustomerEntity {
   public void setCountry(String country) {
     this.country = country;
   }
-
-  @Column(name = "CustomerName")
-  private String customerName;
-
-  @Column(name = "ContactName")
-  private String contactName;
-
-  @Column(name = "Address")
-  private String address;
-
-  @Column(name = "City")
-  private String city;
-
 
   @Override
   public boolean equals(Object o) {

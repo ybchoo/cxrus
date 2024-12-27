@@ -2,11 +2,8 @@ package com.cxrus.cyb.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.cxrus.cyb.entity.OrderEntity;
 import com.cxrus.cyb.exception.CustomerIdExistException;
 import com.cxrus.cyb.exception.handler.HandlerException;
-import com.cxrus.cyb.repositories.CustomerRepository;
-import com.cxrus.cyb.service.OrderService;
 
 import com.cxrus.cyb.service.CustomerService;
 import com.cxrus.cyb.entity.CustomerEntity;
@@ -54,7 +51,7 @@ public class CustomerController {
     return ResponseEntity.ok(_customerList);
   }
 
-  @GetMapping("/customers/topten")
+  @GetMapping("/customers/top-ten")
   public ResponseEntity getTopTenCustomers() {
     logger.info("Inside getTopTenCustomers");
     System.out.println("Inside getTopTenCustomers");
@@ -71,9 +68,11 @@ public class CustomerController {
   }
 
   @PutMapping("/customer")
-  public ResponseEntity updateCustomer(@RequestBody CustomerEntity customerEntity) {
+  public ResponseEntity updateCustomer(
+      @RequestBody CustomerEntity customerEntity) {
+
     String _string =
-        customerService.updateProduct(customerEntity);
+        customerService.updateCustomer(customerEntity);
     return ResponseEntity.ok(_string);
   }
 

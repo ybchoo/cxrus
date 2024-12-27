@@ -55,7 +55,7 @@ CREATE TABLE `customers` (
   `customer_name` varchar(255) DEFAULT NULL,
   `postal_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `customers` */
 
@@ -150,7 +150,10 @@ insert  into `customers`(`CustomerID`,`CustomerName`,`ContactName`,`address`,`ci
 (88,'Wellington Importadora','Paula Parente','Rua do Mercado, 12','Resende','08737-363','Brazil',NULL,NULL,NULL),
 (89,'White Clover Markets','Karl Jablonski','305 - 14th Ave. S. Suite 3B','Seattle','98128','USA',NULL,NULL,NULL),
 (90,'Wilman Kala','Matti Karttunen','Keskuskatu 45','Helsinki','21240','Finland',NULL,NULL,NULL),
-(91,'Wolski','Zbyszek','ul. Filtrowa 68','Walla','01-012','Poland',NULL,NULL,NULL);
+(91,'Wolski','Zbyszek','ul. Filtrowa 68','Walla','01-012','Poland',NULL,NULL,NULL),
+(93,NULL,NULL,'A1 Address','A1 City',NULL,'A1Country','A1 Contact','A1','111000'),
+(151,NULL,NULL,'A1 Address','A1 City',NULL,'A1Country','A1 Contact','A1','111000'),
+(152,NULL,NULL,'A1 Address','A1 City',NULL,'A1Country','A1 Contact','A1','111000');
 
 /*Table structure for table `customers_seq` */
 
@@ -163,7 +166,7 @@ CREATE TABLE `customers_seq` (
 /*Data for the table `customers_seq` */
 
 insert  into `customers_seq`(`next_val`) values 
-(1);
+(250);
 
 /*Table structure for table `employees` */
 
@@ -1003,7 +1006,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`ProductID`),
   KEY `CategoryID` (`CategoryID`),
   KEY `SupplierID` (`SupplierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `products` */
 
@@ -1084,7 +1087,8 @@ insert  into `products`(`ProductID`,`ProductName`,`SupplierID`,`CategoryID`,`uni
 (74,'Longlife Tofu',4,7,'5 kg pkg.',10,0,NULL,NULL,NULL,NULL,NULL),
 (75,'Rhönbräu Klosterbier',12,1,'24 - 0.5 l bottles',8,0,NULL,NULL,NULL,NULL,NULL),
 (76,'Lakkalikööri',23,1,'500 ml',18,0,NULL,NULL,NULL,NULL,NULL),
-(77,'Original Frankfurter grüne Soße',12,2,'12 boxes',13,0,NULL,NULL,NULL,NULL,NULL);
+(77,'Original Frankfurter grüne Soße',12,2,'12 boxes',13,0,NULL,NULL,NULL,NULL,NULL),
+(80,NULL,NULL,NULL,NULL,NULL,29,1,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `products_seq` */
 
@@ -1097,7 +1101,7 @@ CREATE TABLE `products_seq` (
 /*Data for the table `products_seq` */
 
 insert  into `products_seq`(`next_val`) values 
-(101);
+(128);
 
 /*Table structure for table `shippers` */
 

@@ -27,7 +27,8 @@ public class OrderService {
     return orderRepository.findById( ((Number)id).intValue() );
   }
 
-  public List<OrderEntity> getOrders() {
+  public List<OrderEntity> getOrders()
+  {
     return orderRepository.findAll();
   }
 

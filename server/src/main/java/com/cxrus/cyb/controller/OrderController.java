@@ -5,6 +5,8 @@ import java.util.Optional;
 import com.cxrus.cyb.entity.CustomerEntity;
 import com.cxrus.cyb.entity.OrderEntity;
 import com.cxrus.cyb.entity.ProductEntity;
+import com.cxrus.cyb.exception.CustomerIdExistException;
+import com.cxrus.cyb.exception.handler.HandlerException;
 import com.cxrus.cyb.repositories.OrderRepository;
 import com.cxrus.cyb.service.OrderService;
 import com.cxrus.cyb.service.ProductService;
@@ -32,11 +34,15 @@ public class OrderController {
   @GetMapping("/order/{id}")
   @ResponseStatus(code = HttpStatus.OK)
   public ResponseEntity getOrderById(@PathVariable Long id) {
-    logger.info("=========== Inside getOrderById =========== ");
-    System.out.println("=========== Inside getOrderById =========== ");
+    System.out.println("Inside getCustomerById");
+    logger.info("Inside getCustomerById");
     Optional<OrderEntity> _order = orderService.getOrderById(id);
-    System.out.println("=========== [[" +_order.isEmpty() +"]] =========== ");
-    return ResponseEntity.ok(_order);
+    if (_order.isEmpty()) {
+      HandlerException _handlerException = new HandlerException();
+      return (ResponseEntity<OrderEntity>) _handlerException.handleCustomerNotFound(
+          new CustomerIdExistException(String.format("Order  [",id+"] Not Found") ));
+    }
+    return ResponseEntity.ok(_order.get());
   }
 
   @GetMapping("/orders")

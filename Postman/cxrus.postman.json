@@ -49,13 +49,33 @@
 					"response": []
 				},
 				{
-					"name": "add product [NOk]",
+					"name": "top ten [Ok]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/top-ten",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"top-ten"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add product [Ok]",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"productId\": 80,\r\n        \"categoryid\": 2,\r\n        \"discontinued\": true, \r\n        \"product_name\": \"A999\",\r\n        \"unit\": 555,\r\n        \"reorder_level\": 3,\r\n        \"supplierid\": 2,\r\n        \"price\":909.09,\r\n        \"units_in_stock\":19,\r\n        \"units_on_order\":5\r\n}",
+							"raw": "{\r\n        \"categoryid\": 2,\r\n        \"discontinued\": 1, \r\n        \"product_name\": \"A999\",\r\n        \"unit\": 555,\r\n        \"reorder_level\": 3,\r\n        \"supplierid\": 2,\r\n        \"price\":909.09,\r\n        \"units_in_stock\":19,\r\n        \"units_on_order\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,26 +91,6 @@
 							"port": "8080",
 							"path": [
 								"product"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "top ten [Ok]",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/products/top-ten",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"top-ten"
 							]
 						}
 					},
@@ -189,19 +189,19 @@
 					"response": []
 				},
 				{
-					"name": "top ten",
+					"name": "top ten [Ok]",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/customer/top-ten",
+							"raw": "http://localhost:8080/customers/top-ten",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"customer",
+								"customers",
 								"top-ten"
 							]
 						}
@@ -209,7 +209,7 @@
 					"response": []
 				},
 				{
-					"name": "add customers",
+					"name": "add customers [Ok]",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -223,30 +223,27 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/products",
+							"raw": "http://localhost:8080/customer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"products"
+								"customer"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "update customers",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "update customers [Ok]",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customerName\" : \"A1\",\r\n    \"contactName\" : \"A1 Contact\",\r\n    \"address\" : \"A1 Address\",\r\n    \"city\" : \"A1 City\",\r\n    \"postalCode\" : 111000,\r\n    \"country\": \"A1Country\"\r\n}",
+							"raw": "{\r\n    \"customerID\" : \"151\",\r\n    \"customerName\" : \"A1\",\r\n    \"contactName\" : \"A1 Contact\",\r\n    \"address\" : \"A1 Address\",\r\n    \"city\" : \"A1 City\",\r\n    \"postalCode\" : 111000,\r\n    \"country\": \"A1Country\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -254,14 +251,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/customers",
+							"raw": "http://localhost:8080/customer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"customers"
+								"customer"
 							]
 						}
 					},
@@ -278,7 +275,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/order/1",
+							"raw": "http://localhost:8080/order/10251",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -286,7 +283,7 @@
 							"port": "8080",
 							"path": [
 								"order",
-								"1"
+								"10251"
 							]
 						}
 					},
@@ -334,24 +331,57 @@
 				{
 					"name": "add order",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "update order",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "delete order",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order"
+							]
+						}
 					},
 					"response": []
 				}

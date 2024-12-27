@@ -1,19 +1,13 @@
 package com.cxrus.cyb.service;
 import com.cxrus.cyb.entity.CustomerEntity;
-import com.cxrus.cyb.entity.OrderEntity;
 import com.cxrus.cyb.repositories.CustomerRepository;
-import com.cxrus.cyb.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class CustomerService {
@@ -49,7 +43,7 @@ public class CustomerService {
     return _customerEntity;
   }
 
-  public String updateProduct(CustomerEntity customerEntity) {
+  public String updateCustomer(CustomerEntity customerEntity) {
     if (customerEntity != null) {
       long _id = customerEntity.getCustomerID();
       if (!customerRepository.findById((int)_id).isEmpty()) {
