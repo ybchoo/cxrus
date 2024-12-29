@@ -1,15 +1,87 @@
 package com.cxrus.cyb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-
+@Data
 @Entity
+@NoArgsConstructor
+
 @Table(name = "customers")
+@JsonIdentityInfo(
+    generator= ObjectIdGenerators.PropertyGenerator.class,
+    property="orderId",
+    scope=CustomerEntity.class)
 public class CustomerEntity {
+  public String getPostalCode() {
+    return postalCode;
+  }
+
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
+  }
+
+  public String getCustomerName() {
+    return customerName;
+  }
+
+  public void setCustomerName(String customerName) {
+    this.customerName = customerName;
+  }
+
+  public Long getCustomerID() {
+    return customerID;
+  }
+
+  public void setCustomerID(Long customerID) {
+    this.customerID = customerID;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  public String getContactName() {
+    return contactName;
+  }
+
+  public void setContactName(String contactName) {
+    this.contactName = contactName;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id
+  @JsonProperty("customerID")
+  @Column(name="custId")
   private Long customerID;
 
   @Column(name = "CustomerName")
@@ -30,97 +102,4 @@ public class CustomerEntity {
   @Column(name = "Country")
   private String country;
 
-  public CustomerEntity(){}
-
-  public CustomerEntity(Long customerID, String customerName, String contactName, String address, String city, String postalCode, String country) {
-    this.customerID = customerID;
-    this.customerName = customerName;
-    this.contactName = contactName;
-    this.address = address;
-    this.city = city;
-    this.postalCode = postalCode;
-    this.country = country;
-  }
-
-  public Long getCustomerID() {
-    return customerID;
-  }
-
-  public void setCustomerID(Long customerID) {
-    this.customerID = customerID;
-  }
-
-  public String getCustomerName() {
-    return customerName;
-  }
-
-  public void setCustomerName(String customerName) {
-    this.customerName = customerName;
-  }
-
-  public String getContactName() {
-    return contactName;
-  }
-
-  public void setContactName(String contactName) {
-    this.contactName = contactName;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public String getCity() {
-    return city;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  public String getPostalCode() {
-    return postalCode;
-  }
-
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
-  }
-
-  public String getCountry() {
-    return country;
-  }
-
-  public void setCountry(String country) {
-    this.country = country;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass())
-      return false;
-    CustomerEntity that = (CustomerEntity) o;
-    return Objects.equals(customerID, that.customerID) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country) && Objects.equals(customerName, that.customerName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(customerID, postalCode, country, customerName, contactName, address, city);
-  }
-
-  @Override
-  public String toString() {
-    return "CustomerEntity{" +
-        "customerID=" + customerID +
-        ", postalCode='" + postalCode + '\'' +
-        ", country='" + country + '\'' +
-        ", customerName='" + customerName + '\'' +
-        ", contactName='" + contactName + '\'' +
-        ", address='" + address + '\'' +
-        ", city='" + city + '\'' +
-        '}';
-  }
 }

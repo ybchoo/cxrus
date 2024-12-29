@@ -1,49 +1,22 @@
 package com.cxrus.cyb.entity;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import lombok.Data;
+import java.util.*;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "orders")
+@JsonIdentityInfo(
+    generator= ObjectIdGenerators.PropertyGenerator.class,
+    property="orderId",
+    scope=OrderEntity.class)
+
 public class OrderEntity {
-
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long orderId;
-
-
-  @Column(name = "EmployeeID")
-  private Integer employeeId;
-
-  @Column(name = "OrderDate")
-  private LocalDate orderDate;
-
-  @Column(name = "ShipperID")
-  private Integer shipperId;
-
-  @OneToOne(
-      fetch = FetchType.LAZY,
-      optional = false, // NOT NULL
-      cascade = CascadeType.PERSIST
-  )
-  @JoinColumn(unique = true)
-  private CustomerEntity customer;
-
-
-  @ManyToMany
-  @JoinTable(name = "orderdetails",
-      joinColumns = @JoinColumn(name = "OrderID"),
-      inverseJoinColumns = @JoinColumn(name = "ProductID"))
-  private List<ProductEntity> productList =
-        new ArrayList<>();
-
-  public OrderEntity() {}
 
   public OrderEntity(CustomerEntity customer, Integer employeeId, LocalDate orderDate, Long orderId, Integer shipperId) {
     this.customer = customer;
@@ -53,27 +26,12 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
-  public OrderEntity(
-      CustomerEntity customer,
-      Integer employeeId,
-      LocalDate orderDate,
-      Long orderId,
-      List<ProductEntity> productList,
-      Integer shipperId) {
+  public CustomerEntity getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(CustomerEntity customer) {
     this.customer = customer;
-    this.employeeId = employeeId;
-    this.orderDate = orderDate;
-    this.orderId = orderId;
-    this.productList = productList;
-    this.shipperId = shipperId;
-  }
-
-  public Long getOrderId() {
-    return orderId;
-  }
-
-  public void setOrderId(Long orderId) {
-    this.orderId = orderId;
   }
 
   public Integer getEmployeeId() {
@@ -92,6 +50,14 @@ public class OrderEntity {
     this.orderDate = orderDate;
   }
 
+  public Long getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(Long orderId) {
+    this.orderId = orderId;
+  }
+
   public Integer getShipperId() {
     return shipperId;
   }
@@ -100,42 +66,25 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
-  public List<ProductEntity> getProductList() {
-    return productList;
-  }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonProperty("orderId")
+  @Column(name = "OrderID")
+  private Long orderId;
 
-  public void setProductList(List<ProductEntity> productList) {
-    this.productList = productList;
-  }
+  @Column(name = "EmployeeID")
+  @JsonProperty("employeeId")
+  private Integer employeeId;
 
-  public CustomerEntity getCustomer() {
-    return customer;
-  }
+  @Column(name = "OrderDate")
+  @JsonProperty("orderDate")
+  private LocalDate orderDate;
 
-  public void setCustomer(CustomerEntity customer) {
-    this.customer = customer;
-  }
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) return false;
-    OrderEntity that = (OrderEntity) o;
-    return Objects.equals(orderId, that.orderId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipperId, that.shipperId) && Objects.equals(customer, that.customer) && Objects.equals(productList, that.productList);
-  }
+  @Column(name = "ShipperID")
+  @JsonProperty("shipperId")
+  private Integer shipperId;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(orderId, employeeId, orderDate, shipperId, customer, productList);
-  }
-
-  @Override
-  public String toString() {
-    return "OrderEntity{" +
-        "customer=" + customer +
-        ", orderId=" + orderId +
-        ", employeeId=" + employeeId +
-        ", orderDate=" + orderDate +
-        ", shipperId=" + shipperId +
-        ", productList=" + productList +
-        '}';
-  }
+  @ManyToOne
+  @JoinColumn(name = "customerID", nullable = false)
+  private CustomerEntity customer;
 }

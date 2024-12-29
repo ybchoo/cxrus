@@ -1,57 +1,53 @@
 package com.cxrus.cyb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "products")
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIdentityInfo(
+    generator= ObjectIdGenerators.PropertyGenerator.class,
+    property="productId",
+    scope=ProductEntity.class)
 
 public class ProductEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonProperty("productId")
+  @Column(name ="ProductID")
   private Long productId;
 
   @Column(name = "ProductName")
+  @JsonProperty("productName")
   private String productName;
 
-  @Column(name = "SupplierID")
-  private Integer supplierId;
+  public Integer getCategoryId() {
+    return categoryId;
+  }
 
-  @Column(name = "CategoryID")
-  private Integer categoryId;
-
-  @Column(name = "Unit")
-  private String quantityPerUnit;
-
-  @Column(name = "Price")
-  private Float unitPrice;
-
-  private Integer unitsInStock;
-
-  private Integer unitsOnOrder;
-
-  private Integer reorderLevel;
-
-  private Integer discontinued;
-
-  public ProductEntity(){}
-
-  public ProductEntity(Float unitPrice,
-                       String quantityPerUnit,
-                       Integer categoryId,
-                       Integer supplierId,
-                       String productName,
-                       Long productId) {
-    this.unitPrice = unitPrice;
-    this.quantityPerUnit = quantityPerUnit;
+  public void setCategoryId(Integer categoryId) {
     this.categoryId = categoryId;
-    this.supplierId = supplierId;
-    this.productName = productName;
-    this.productId = productId;
+  }
+
+  public Integer getDiscontinued() {
+    return discontinued;
+  }
+
+  public void setDiscontinued(Integer discontinued) {
+    this.discontinued = discontinued;
   }
 
   public Long getProductId() {
@@ -70,28 +66,28 @@ public class ProductEntity {
     this.productName = productName;
   }
 
-  public Integer getSupplierId() {
-    return supplierId;
-  }
-
-  public void setSupplierId(Integer supplierId) {
-    this.supplierId = supplierId;
-  }
-
-  public Integer getCategoryId() {
-    return categoryId;
-  }
-
-  public void setCategoryId(Integer categoryId) {
-    this.categoryId = categoryId;
-  }
-
   public String getQuantityPerUnit() {
     return quantityPerUnit;
   }
 
   public void setQuantityPerUnit(String quantityPerUnit) {
     this.quantityPerUnit = quantityPerUnit;
+  }
+
+  public Integer getReorderLevel() {
+    return reorderLevel;
+  }
+
+  public void setReorderLevel(Integer reorderLevel) {
+    this.reorderLevel = reorderLevel;
+  }
+
+  public Integer getSupplierId() {
+    return supplierId;
+  }
+
+  public void setSupplierId(Integer supplierId) {
+    this.supplierId = supplierId;
   }
 
   public Float getUnitPrice() {
@@ -118,47 +114,33 @@ public class ProductEntity {
     this.unitsOnOrder = unitsOnOrder;
   }
 
-  public Integer getReorderLevel() {
-    return reorderLevel;
-  }
+  @Column(name = "SupplierID")
+  @JsonProperty("supplierId")
+  private Integer supplierId;
 
-  public void setReorderLevel(Integer reorderLevel) {
-    this.reorderLevel = reorderLevel;
-  }
+  @Column(name = "CategoryID")
+  @JsonProperty("categoryId")
+  private Integer categoryId;
 
-  public Integer getDiscontinued() {
-    return discontinued;
-  }
+  @Column(name = "Unit")
+  @JsonProperty("quantityPerUnit")
+  private String quantityPerUnit;
 
-  public void setDiscontinued(Integer discontinued) {
-    this.discontinued = discontinued;
-  }
+  @Column(name = "Price")
+  @JsonProperty("unitPrice")
+  private Float unitPrice;
 
-  @Override
-  public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) return false;
-    ProductEntity that = (ProductEntity) o;
-    return Objects.equals(productId, that.productId) && Objects.equals(productName, that.productName) && Objects.equals(supplierId, that.supplierId) && Objects.equals(categoryId, that.categoryId) && Objects.equals(quantityPerUnit, that.quantityPerUnit) && Objects.equals(unitPrice, that.unitPrice) && Objects.equals(unitsInStock, that.unitsInStock) && Objects.equals(unitsOnOrder, that.unitsOnOrder) && Objects.equals(reorderLevel, that.reorderLevel) && Objects.equals(discontinued, that.discontinued);
-  }
+  @JsonProperty("unitsInStock")
+  private Integer unitsInStock;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(productId, productName, supplierId, categoryId, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued);
-  }
+  @JsonProperty("unitsOnOrder")
+  private Integer unitsOnOrder;
 
-  @Override
-  public String toString() {
-    return "ProductEntity{" +
-        "productId=" + productId +
-        ", productName='" + productName + '\'' +
-        ", supplierId=" + supplierId +
-        ", categoryId=" + categoryId +
-        ", quantityPerUnit='" + quantityPerUnit + '\'' +
-        ", unitPrice=" + unitPrice +
-        ", unitsInStock=" + unitsInStock +
-        ", unitsOnOrder=" + unitsOnOrder +
-        ", reorderLevel=" + reorderLevel +
-        ", discontinued=" + discontinued +
-        '}';
-  }
+  @JsonProperty("reorderLevel")
+  private Integer reorderLevel;
+
+  @JsonProperty("discontinued")
+  private Integer discontinued;
+
+
 }
