@@ -64,66 +64,112 @@ export default function customer() {
      useSuspenseQuery(customerDetailQuery(customerID))
 
   return (
-    <div id="customer">
-      <b>Customer Name customer</b><br />
-      <b>customer ID</b><br />
-      <input placeholder="Enter customer Id"
-        aria-label="customer Id" type="text"
-        name="customerId" size="60" 
-        defaultValue={customer.customerID} /><br />
-      { console.dir(customer) }<br />
-      <b>Postal Code</b><br />
-      <input placeholder="Enter Postal Code"
-        aria-label="postalCode" type="text"
-        name="postalCode" size="60" 
-        defaultValue={customer.postalCode} /><br />
-        
-      <b>Country</b><br />
-      <input placeholder="Country"
-        aria-label="Country" type="text"
-        name="country" 
-        defaultValue={customer.country} /><br />
-        
-      <b>Customer Name</b><br />
-      <input placeholder="Enter Customer Name"
-        aria-label="customerName" type="text"
-        name="customerName" size="14" 
-        defaultValue={customer.customerName} /><br />
-      
-      <b>Supplier Id</b><br />
-      <input placeholder="Enter Contact Name"
-        aria-label="contactName" type="text"
-        name="contactName" size="16" 
-        defaultValue={customer.contactName} /><br />
-      
-      <b>Address</b><br />
-      <input placeholder="Enter Address"
-        aria-label="address" type="text"
-        name="address" size="20" 
-        defaultValue={customer.address} /><br />
-        
-      <b>City</b><br />
-      <input placeholder="Enter City"
-        aria-label="city" type="text"
-        name="city" size="18" 
-        defaultValue={customer.city} /><br />
+    <div id="product">
+      <h5 className="flex justify-between font-bold text-white 
+                     items-center sticky top-0 z-10 
+                     py-4 bg-blue-400">
+        Customer Information
+      </h5>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 gap-6">
+          <label className="block">
+            <span className="text-gray-700">
+             Customer ID
+            </span>
+            <input type="text"
+              className="mt-1 block w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+              defaultValue={product?.customerID} 
+              placeholder="" />
+          </label>
+          { console.dir(customer) }<br />
+          <label className="block">
+            <span className="text-gray-700">          
+              Customer Name
+            </span> 
+            <input  type="text" placeholder=""
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 
+              focus:bg-white focus:ring-0" 
+              defaultValue={customer?.customerName} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Postal Code
+            </span> 
+            <input  type="text" placeholder=""
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 
+              focus:bg-white focus:ring-0" 
+              defaultValue={customer?.postalCode} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Country
+            </span> 
+            <input className="mt-1 block w-full rounded-md 
+                   border-transparent bg-gray-100 
+                   focus:border-gray-500 
+                   focus:bg-white focus:ring-0"
+                   defaultValue={product?.country} 
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Contact Name
+            </span> 
+            <input className="mt-1 block w-full rounded-md 
+                   border-transparent bg-gray-100 
+                   focus:border-gray-500 
+                   focus:bg-white focus:ring-0"
+              defaultValue={customer.?contactName} />
+          </label>
 
-      <br />
-      <span>
-        <Link to="edit" className="button">
-          Edit
-        </Link>
-        <Form method="post" action="destroy"
-          onSubmit={(event) => {
-            // eslint-disable-next-line no-restricted-globals
-            if (!confirm('Please confirm you want to delete this record.')) {
-              event.preventDefault()
-            }
-          }}
-        >
-          <button type="submit">Delete</button>
-        </Form>
-      </span>
+          <label className="block">
+            <span className="text-gray-700">          
+              Address
+            </span> 
+            <input className="mt-1 block w-full rounded-md 
+                   border-transparent bg-gray-100 
+                   focus:border-gray-500 
+                   focus:bg-white focus:ring-0"
+              defaultValue={customer.?address} />
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700">          
+              City
+            </span> 
+            <input className="mt-1 block w-full rounded-md 
+                   border-transparent bg-gray-100 
+                   focus:border-gray-500 
+                   focus:bg-white focus:ring-0"
+              defaultValue={customer.?city} />
+          </label>          
+        </div>
+        <br />
+        <br />
+        <div className="grid grid-cols-2 gap-6">
+          <Link to="edit" 
+                className="px-2 rounded-r-lg focus:outline-none text-center text-xl text-gray-400➥
+                hover:text-gray-900 bg-white">
+            Edit
+          </Link>
+          <Form method="post" action="destroy" onSubmit={(event) => {
+              // eslint-disable-next-line no-restricted-globals
+              if (!confirm('Please confirm you want to delete '+
+                           'this record.')) {
+                event.preventDefault()
+              }
+            }}
+          >
+            <button type="submit"
+                className="px-2 rounded-r-lg focus:outline-none text-center text-xl text-gray-400➥
+                hover:text-gray-900 bg-white">
+                Delete
+            </button>
+          </Form>
+        </div>
     </div>
   )
 }

@@ -39,10 +39,12 @@ export function ProductForm({ product }: { product?: Product }) {
 
   return (
     <Form method="post" id="product-form">
-      <h5 className="text-2xl font-bold .text-blue-400">
+      <h5 className="flex justify-between font-bold text-white 
+                     items-center sticky top-0 z-10 
+                     py-4 bg-blue-300">
         New Product
       </h5>
-      <div className="mt-12 max-w-md">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-6">
           <label className="block">
             <span className="text-gray-700">
@@ -142,25 +144,26 @@ export function ProductForm({ product }: { product?: Product }) {
           </label>
         </div>
       </div>
-      
-      <p>
+      <br />
+      <br />
+      <div className="grid grid-cols-2 gap-6">
         <button type="submit"
-          className="m-4 p-4 border-2 
-                     border-black rounded-md
-                     mx-10 shadow-lg bg-white
-                     ">
+          className="px-2 rounded-r-lg focus:outline-none text-center text-xl text-gray-400➥
+          hover:text-gray-900 bg-blue=900">
           Save
         </button>
+        {'  '}
         <button type="button" 
-          className="m-4 p-4 border-2 border-black rounded-md
-                     mx-10 shadow-lg bg-white"
-          onClick={() => {
+          className="px-2 rounded-r-lg focus:outline-none 
+              text-center text-xl text-white-200
+              hover:text-white-900 bg-blue-300"
+            onClick={() => {
             navigate(-1)
           }}
         >
           Cancel
         </button>
-      </p>
+      </div>
     </Form>
   )
 }

@@ -61,12 +61,12 @@ export default function Product() {
 
   return (
     <div id="product">
-      <h5 className="text-2xl font-bold .text-blue-400">
+      <h5 className="flex justify-between font-bold text-white 
+                     items-center sticky top-0 z-10 
+                     py-4 bg-blue-400">
         Product Information
       </h5>
-      
-      
-      <div className="mt-12 max-w-md">
+      <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-6">
           <label className="block">
             <span className="text-gray-700">
@@ -165,9 +165,12 @@ export default function Product() {
               />
           </label>
         </div>
-
-        <div>
-          <Link to="edit" className="button">
+        <br />
+        <br />
+        <div className="grid grid-cols-2 gap-6">
+          <Link to="edit" 
+                className="px-2 rounded-r-lg focus:outline-none text-center text-xl text-gray-400➥
+                hover:text-gray-900 bg-white">
             Edit
           </Link>
           <Form method="post" action="destroy" onSubmit={(event) => {
@@ -178,7 +181,11 @@ export default function Product() {
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type="submit"
+                className="px-2 rounded-r-lg focus:outline-none text-center text-xl text-gray-400➥
+                hover:text-gray-900 bg-white">
+                Delete
+            </button>
           </Form>
         </div>
       </div>
