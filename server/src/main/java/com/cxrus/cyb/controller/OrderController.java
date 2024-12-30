@@ -2,14 +2,8 @@ package com.cxrus.cyb.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.cxrus.cyb.entity.CustomerEntity;
 import com.cxrus.cyb.entity.OrderEntity;
-import com.cxrus.cyb.entity.ProductEntity;
-import com.cxrus.cyb.exception.CustomerIdExistException;
-import com.cxrus.cyb.exception.handler.HandlerException;
-import com.cxrus.cyb.repositories.OrderRepository;
 import com.cxrus.cyb.service.OrderService;
-import com.cxrus.cyb.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +32,11 @@ public class OrderController {
   @GetMapping("/order/{id}")
   @ResponseStatus(code = HttpStatus.OK)
   public ResponseEntity getOrderById(@PathVariable Long id) {
-    System.out.println("Inside getCustomerById");
-    logger.info("Inside getCustomerById");
-    Optional<OrderEntity> _order = orderService.getOrderById(id);
-    if (_order.isEmpty()) {
-      HandlerException _handlerException = new HandlerException();
-      return (ResponseEntity<OrderEntity>) _handlerException.handleCustomerNotFound(
-          new CustomerIdExistException(String.format("Order  [",id+"] Not Found") ));
-    }
-    return ResponseEntity.ok(_order.get());
+    logger.info("============Inside getOrderById  [[["+id+"]]");
+    System.out.println("===========Inside getOrderById");
+    Optional<OrderEntity> _order =
+        orderService.findOrderById(id);
+    return ResponseEntity.ok( _order );
   }
 
   @GetMapping("/orders")
@@ -76,8 +66,19 @@ public class OrderController {
 
   @PutMapping("/order")
   public ResponseEntity updateOrder(@RequestBody OrderEntity orderEntity) {
-    String _string = orderService.updateProduct(orderEntity);
-    return ResponseEntity.ok(_string);
+
+    OrderEntity _order =
+        orderService.findByOrderId( orderEntity.getOrderId() );
+    System.out.println("Product Id   [["+orderEntity.getOrderId()+"]]");
+    System.out.println("Product Size   [["+_order.getOrderId()+"]]");
+
+    _order.setCustomer(orderEntity.getCustomer());
+    _order.setEmployeeId(orderEntity.getEmployeeId());
+    _order.setOrderDate(orderEntity.getOrderDate());
+    _order.setShipperId(orderEntity.getShipperId());
+    return ResponseEntity.ok(
+        orderService.updateOrder(_order));
+
   }
 
   @DeleteMapping("/order/{id}")

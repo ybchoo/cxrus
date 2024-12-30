@@ -5,12 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Entity
@@ -30,9 +25,39 @@ public class ProductEntity {
   @Column(name ="ProductID")
   private Long productId;
 
-  @Column(name = "ProductName")
-  @JsonProperty("productName")
+  @JsonProperty("ProductName")
+  @Column(name = "\"ProductName\"")
   private String productName;
+
+  @Column(name = "SupplierID")
+  @JsonProperty("supplierId")
+  private Integer supplierId;
+
+  @Column(name = "CategoryID")
+  @JsonProperty("categoryId")
+  private Integer categoryId;
+
+  @Column(name = "Unit")
+  @JsonProperty("quantityPerUnit")
+  private String quantityPerUnit;
+
+  @Column(name = "Price")
+  @JsonProperty("unitPrice")
+  private Float unitPrice;
+
+  @JsonProperty("unitsInStock")
+  @Column(name = "\nunits_in_stock\"")
+  private Integer unitsInStock;
+
+  @JsonProperty("unitsOnOrder")
+  @Column(name = "\"units_on_order\"")
+  private Integer unitsOnOrder;
+
+  @JsonProperty("reorderLevel")
+  private Integer reorderLevel;
+
+  @JsonProperty("discontinued")
+  private Integer discontinued;
 
   public Integer getCategoryId() {
     return categoryId;
@@ -114,33 +139,7 @@ public class ProductEntity {
     this.unitsOnOrder = unitsOnOrder;
   }
 
-  @Column(name = "SupplierID")
-  @JsonProperty("supplierId")
-  private Integer supplierId;
 
-  @Column(name = "CategoryID")
-  @JsonProperty("categoryId")
-  private Integer categoryId;
-
-  @Column(name = "Unit")
-  @JsonProperty("quantityPerUnit")
-  private String quantityPerUnit;
-
-  @Column(name = "Price")
-  @JsonProperty("unitPrice")
-  private Float unitPrice;
-
-  @JsonProperty("unitsInStock")
-  private Integer unitsInStock;
-
-  @JsonProperty("unitsOnOrder")
-  private Integer unitsOnOrder;
-
-  @JsonProperty("reorderLevel")
-  private Integer reorderLevel;
-
-  @JsonProperty("discontinued")
-  private Integer discontinued;
 
 
 }

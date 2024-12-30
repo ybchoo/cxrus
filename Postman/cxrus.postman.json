@@ -35,7 +35,7 @@
 					"response": []
 				},
 				{
-					"name": "product by Id [NOk]",
+					"name": "product by Id [Ok]",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -121,7 +121,7 @@
 					"response": []
 				},
 				{
-					"name": "update product",
+					"name": "update product [Ok]",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -133,7 +133,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"productId\": 11,\r\n        \"categoryid\": 2,\r\n        \"discontinued\": 2, \r\n        \"product_name\": \"A999\",\r\n        \"unit\": 555,\r\n        \"reorder_level\": 3,\r\n        \"supplierid\": 10,\r\n        \"price\":909.09,\r\n        \"units_in_stock\":19,\r\n        \"units_on_order\":5\r\n}",
+							"raw": "{\r\n        \"productId\": 11,\r\n        \"categoryid\": 2,\r\n        \"discontinued\": 2, \r\n        \"product_name\": \"A999\",\r\n        \"unit\": 1999,\r\n        \"reorder_level\": 3,\r\n        \"supplierid\": 10,\r\n        \"price\":909.09,\r\n        \"units_in_stock\":19,\r\n        \"units_on_order\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,7 +155,7 @@
 					"response": []
 				},
 				{
-					"name": "delete Product",
+					"name": "delete Product [Ok]",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -277,7 +277,7 @@
 					"response": []
 				},
 				{
-					"name": "add customers [Ok]",
+					"name": "add customers [NOk]",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -323,7 +323,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customerID\" : \"151\",\r\n    \"customerName\" : \"A1\",\r\n    \"contactName\" : \"A1 Contact\",\r\n    \"address\" : \"A1 Address\",\r\n    \"city\" : \"A1 City\",\r\n    \"postalCode\" : 111000,\r\n    \"country\": \"A1Country\"\r\n}",
+							"raw": "{\r\n    \"customerID\" : \"151\",\r\n    \"customerName\" : \"A2\",\r\n    \"contactName\" : \"A2 Contact\",\r\n    \"address\" : \"A2 Address\",\r\n    \"city\" : \"A1 City\",\r\n    \"postalCode\" : 111000,\r\n    \"country\": \"A1Country\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -343,6 +343,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "delete customer [Ok]",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/customer/152",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"152"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -350,7 +376,7 @@
 			"name": "orders",
 			"item": [
 				{
-					"name": "get order by Id",
+					"name": "get order by Id [Ok]",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -401,7 +427,7 @@
 					"response": []
 				},
 				{
-					"name": "top ten",
+					"name": "top ten [Ok]",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -427,7 +453,7 @@
 					"response": []
 				},
 				{
-					"name": "add order",
+					"name": "add order [Nok]",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -452,7 +478,7 @@
 					"response": []
 				},
 				{
-					"name": "update order",
+					"name": "update order [Ok]",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -462,6 +488,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": 10255,\r\n    \"customer\": {\r\n        \"customerID\": 11,\r\n        \"customerName\": \"Testing Order Customer Name\",\r\n        \"contactName\": \"Testing Order Customer\",\r\n        \"address\": \"Testing Order Address\",\r\n        \"city\": \"Testing Order\",\r\n        \"postalCode\": \"221122\",\r\n        \"country\": \"Testing Order\"\r\n    },\r\n    \"employeeId\": 9,\r\n    \"orderDate\": \"1900-01-01\",\r\n    \"shipperId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/order",
 							"protocol": "http",
@@ -477,7 +512,7 @@
 					"response": []
 				},
 				{
-					"name": "delete order",
+					"name": "delete order [Ok]",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -488,7 +523,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/order/1",
+							"raw": "http://localhost:8080/order/10443",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -496,7 +531,7 @@
 							"port": "8080",
 							"path": [
 								"order",
-								"1"
+								"10443"
 							]
 						}
 					},

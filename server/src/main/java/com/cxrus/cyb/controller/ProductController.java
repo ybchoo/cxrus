@@ -3,12 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-import com.cxrus.cyb.entity.CustomerEntity;
 import com.cxrus.cyb.entity.ProductEntity;
-import com.cxrus.cyb.exception.CustomerIdExistException;
-import com.cxrus.cyb.exception.ProductIdExistException;
-import com.cxrus.cyb.exception.handler.HandlerException;
-import com.cxrus.cyb.repositories.ProductRepository;
 import com.cxrus.cyb.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 @RestController
+
 @RequestMapping(
     consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
+
+
 public class ProductController {
   protected static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
@@ -52,7 +50,6 @@ public class ProductController {
   }
 
   @GetMapping("/products/top-ten")
-
   public ResponseEntity getTopTenProducts() {
     logger.info("========== Inside getTopTenProducts");
     System.out.println("========== Inside getTopTenProducts");
@@ -72,7 +69,6 @@ public class ProductController {
   @ResponseBody
   public ResponseEntity updateProduct(
       @RequestBody ProductEntity productEntity) {
-
 
     ProductEntity _product =
         productService.findByProductId( productEntity.getProductId() );

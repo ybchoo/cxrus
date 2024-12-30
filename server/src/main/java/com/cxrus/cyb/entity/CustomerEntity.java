@@ -19,9 +19,35 @@ import java.util.Set;
 @Table(name = "customers")
 @JsonIdentityInfo(
     generator= ObjectIdGenerators.PropertyGenerator.class,
-    property="orderId",
+    property="customerID",
     scope=CustomerEntity.class)
 public class CustomerEntity {
+
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id
+  @JsonProperty("customerID")
+  @Column(name="CustomerID")
+  private Long customerID;
+
+  @Column(name = "CustomerName")
+  private String customerName;
+
+  @Column(name = "ContactName")
+  private String contactName;
+
+  @Column(name = "Address")
+  private String address;
+
+  @Column(name = "City")
+  private String city;
+
+  @Column(name = "PostalCode")
+  private String postalCode;
+
+  @Column(name = "Country")
+  private String country;
+
+
   public String getPostalCode() {
     return postalCode;
   }
@@ -78,28 +104,5 @@ public class CustomerEntity {
     this.address = address;
   }
 
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Id
-  @JsonProperty("customerID")
-  @Column(name="custId")
-  private Long customerID;
-
-  @Column(name = "CustomerName")
-  private String customerName;
-
-  @Column(name = "ContactName")
-  private String contactName;
-
-  @Column(name = "Address")
-  private String address;
-
-  @Column(name = "City")
-  private String city;
-
-  @Column(name = "PostalCode")
-  private String postalCode;
-
-  @Column(name = "Country")
-  private String country;
 
 }

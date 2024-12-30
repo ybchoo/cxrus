@@ -2,6 +2,7 @@ package com.cxrus.cyb.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.cxrus.cyb.entity.ProductEntity;
 import com.cxrus.cyb.exception.CustomerIdExistException;
 import com.cxrus.cyb.exception.handler.HandlerException;
 
@@ -32,16 +33,12 @@ public class CustomerController {
   }
   @GetMapping("/customer/{id}")
   @ResponseStatus(code = HttpStatus.OK)
-  public ResponseEntity<CustomerEntity> getCustomerById(@PathVariable Integer id) {
-    System.out.println("Inside getCustomerById");
-    logger.info("Inside getCustomerById");
-    Optional<CustomerEntity> _customer = customerService.getCustomerById(id);
-    if (_customer.isEmpty()) {
-      HandlerException _handlerException = new HandlerException();
-      return (ResponseEntity<CustomerEntity>) _handlerException.handleCustomerNotFound(
-          new CustomerIdExistException(String.format("Customer  [",id+"] Not Found") ));
-    }
-    return ResponseEntity.ok(_customer.get());
+  public ResponseEntity<Optional<CustomerEntity>> getCustomerById(@PathVariable Integer id) {
+    logger.info("============Inside getCustomerById  [[["+id+"]]");
+    System.out.println("===========Inside getCustomerById");
+    Optional<CustomerEntity> _customer =
+        customerService.getCustomerById(id);
+    return ResponseEntity.ok( _customer );
   }
 
   @GetMapping("/customers")

@@ -1,8 +1,6 @@
 package com.cxrus.cyb.service;
 
-import com.cxrus.cyb.entity.CustomerEntity;
 import com.cxrus.cyb.entity.OrderEntity;
-import com.cxrus.cyb.entity.ProductEntity;
 import com.cxrus.cyb.repositories.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +18,17 @@ public class OrderService {
   @Autowired
   private final OrderRepository orderRepository;
 
-  public OrderService(OrderRepository orderRepository) {
+  public OrderService(OrderRepository orderRepository)
+  {
     this.orderRepository = orderRepository;
   }
-  public Optional<OrderEntity> getOrderById(long id) {
+
+  public Optional<OrderEntity> findOrderById(long id)
+  {
     return orderRepository.findById( ((Number)id).intValue() );
+  }
+  public OrderEntity findByOrderId(long num) {
+    return orderRepository.findByOrderId(num);
   }
 
   public List<OrderEntity> getOrders()
@@ -41,7 +45,7 @@ public class OrderService {
     return _orderEntity;
   }
 
-  public String updateProduct(OrderEntity orderEntity) {
+  public String updateOrder(OrderEntity orderEntity) {
     if (orderEntity != null) {
       long _id = orderEntity.getOrderId();
       if (!orderRepository.findById((int)_id).isEmpty()) {

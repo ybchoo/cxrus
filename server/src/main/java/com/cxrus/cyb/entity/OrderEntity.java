@@ -17,6 +17,29 @@ import java.util.*;
     scope=OrderEntity.class)
 
 public class OrderEntity {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonProperty("orderId")
+  @Column(name = "OrderID")
+  private Long orderId;
+
+  @Column(name = "EmployeeID")
+  @JsonProperty("employeeId")
+  private Integer employeeId;
+
+  @Column(name = "OrderDate")
+  @JsonProperty("orderDate")
+  private LocalDate orderDate;
+
+  @Column(name = "ShipperID")
+  @JsonProperty("shipperId")
+  private Integer shipperId;
+
+  @ManyToOne
+  @JoinColumn(name = "CustomerID", nullable = false)
+  private CustomerEntity customer;
+
+  public OrderEntity() {}
 
   public OrderEntity(CustomerEntity customer, Integer employeeId, LocalDate orderDate, Long orderId, Integer shipperId) {
     this.customer = customer;
@@ -66,25 +89,5 @@ public class OrderEntity {
     this.shipperId = shipperId;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonProperty("orderId")
-  @Column(name = "OrderID")
-  private Long orderId;
 
-  @Column(name = "EmployeeID")
-  @JsonProperty("employeeId")
-  private Integer employeeId;
-
-  @Column(name = "OrderDate")
-  @JsonProperty("orderDate")
-  private LocalDate orderDate;
-
-  @Column(name = "ShipperID")
-  @JsonProperty("shipperId")
-  private Integer shipperId;
-
-  @ManyToOne
-  @JoinColumn(name = "customerID", nullable = false)
-  private CustomerEntity customer;
 }
