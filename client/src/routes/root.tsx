@@ -61,20 +61,12 @@ export default function Root() {
  return (
   <>
    <div id="sidebar">
-   
-   
-    <h2>Products</h2>
+  
     <div>
      <form id="search-form" role="search">
-      <input
-       id="q"
-       aria-label="Search products"
-       placeholder="Search"
-       type="search"
-       name="q"
-       key={q}
-       autoFocus
-       defaultValue={q}
+      <input id="q" aria-label="Search products"
+       placeholder="Search"  type="search"
+       name="q" key={q} autoFocus defaultValue={q}
        className={searching ? 'loading' : ''}
        onChange={(event) => {
         debouncedSubmit(event.currentTarget.form)

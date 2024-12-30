@@ -28,6 +28,7 @@ export const customerDetailQuery = (customerID: string) =>
 export const loader =
   (queryClient: QueryClient) =>
   async ({ params }: LoaderFunctionArgs) => {
+    console.dir(params)
     if (!params.customerID) {
       throw new Error('No customer ID provided')
     }
@@ -40,13 +41,13 @@ export const action =
   (queryClient: QueryClient) =>
   async ({ request, params }: ActionFunctionArgs) => {
     let formData = await request.formData()
-    console.log("Form Data   [[["+formData+"]]")
-    
-    if (!params.customerId) {
+    console.log("Form Data")
+    console.dir(formData)
+    if (!params.customerID) {
       throw new Error('No customer ID provided')
     }
     
-    await updatecustomer(params.customerId, {
+    await updatecustomer(params.customerID, {
       favorite: formData.get('favorite') === 'true',
     })
     
@@ -112,7 +113,7 @@ export default function customer() {
                    border-transparent bg-gray-100 
                    focus:border-gray-500 
                    focus:bg-white focus:ring-0"
-                   defaultValue={product?.country} 
+                   defaultValue={customer?.country} />
           </label>
           <label className="block">
             <span className="text-gray-700">          
@@ -122,7 +123,7 @@ export default function customer() {
                    border-transparent bg-gray-100 
                    focus:border-gray-500 
                    focus:bg-white focus:ring-0"
-              defaultValue={customer.?contactName} />
+              defaultValue={customer?.contactName} />
           </label>
 
           <label className="block">
@@ -133,7 +134,7 @@ export default function customer() {
                    border-transparent bg-gray-100 
                    focus:border-gray-500 
                    focus:bg-white focus:ring-0"
-              defaultValue={customer.?address} />
+              defaultValue={customer?.address} />
           </label>
 
           <label className="block">
@@ -144,7 +145,7 @@ export default function customer() {
                    border-transparent bg-gray-100 
                    focus:border-gray-500 
                    focus:bg-white focus:ring-0"
-              defaultValue={customer.?city} />
+              defaultValue={customer?.city} />
           </label>          
         </div>
         <br />
@@ -170,6 +171,7 @@ export default function customer() {
             </button>
           </Form>
         </div>
+      </div>
     </div>
   )
 }
