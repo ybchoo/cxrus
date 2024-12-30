@@ -78,7 +78,6 @@ const router = createBrowserRouter([
 const rootElement = document.getElementById('root')
 ReactDOM.createRoot(rootElement!).render(
   <React.StrictMode>
-    
     <QueryClientProvider client={queryClient}>
        <RouterProvider router={router} />
        <ReactQueryDevtools buttonPosition="bottom-right" />

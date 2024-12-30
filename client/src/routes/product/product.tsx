@@ -61,81 +61,128 @@ export default function Product() {
 
   return (
     <div id="product">
-      <b>Product Name Product</b><br />
-      <b>Product ID</b><br />
-      <input placeholder="Enter Product Id"
-        aria-label="Product Id" type="text"
-        name="productId" size="60" 
-        defaultValue={product.productId} /><br />
-      { console.dir(product) }<br />
-      <b>Product Name Product</b><br />
-      <input placeholder="Enter Product Name"
-        aria-label="Product Name" type="text"
-        name="productName" size="60" 
-        defaultValue={product.product_name} /><br />
-      <b>Supplier Id</b><br />
-      <input placeholder="Enter Supplier Id"
-        aria-label="Supplier ID" type="text"
-        name="supplierId" 
-        defaultValue={product.supplierid} /><br />
-        
-      <b>Category Id</b><br />
-      <input placeholder=" Enter categoryId"
-        aria-label="Category ID" type="text"
-        name="categoryId" size="14" 
-        defaultValue={product.categoryid} /><br />
+      <h5 className="text-2xl font-bold .text-blue-400">
+        Product Information
+      </h5>
       
-      <b>Supplier Id</b><br />
-      <input placeholder="Enter Supplier Id"
-        aria-label="Supplier Id" type="text"
-        name="SupplierID" size="16" 
-        defaultValue={product.supplierid} /><br />
       
-      <b>Price</b><br />
-      <input placeholder="Enter Price"
-        aria-label="price" type="text"
-        name="price" size="20" 
-        defaultValue={product.price} /><br />
-        
-      <b>Units In Stock</b><br />
-      <input placeholder="Enter Units In Stock"
-        aria-label="unitsInStock" type="text"
-        name="unitsInStock" size="18" 
-        defaultValue={product.units_in_stock} /><br />
-        
-      <b>Units On Order</b><br />
-      <input placeholder="Enter Units On Order"
-        aria-label="unitsOnOrder" type="text"
-        name="unitsOnOrder" size="18" 
-        defaultValue={product.units_on_order} /><br />
+      <div className="mt-12 max-w-md">
+        <div className="grid grid-cols-1 gap-6">
+          <label className="block">
+            <span className="text-gray-700">
+              Product ID
+            </span>
+            <input type="text"
+              className="mt-1 block w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+              defaultValue={product?.productId} placeholder="" />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Product Name
+            </span> 
+            <input type="text"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.product_name} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Category ID
+            </span> 
+            <input type="number" min="1" max="2000"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.categoryid} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Supplier Id
+            </span> 
+            <input type="number" min="1" max="50"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product.categoryid} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Price
+            </span> 
+            <input type="number" step="0.01" min="1" max="2000"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.price} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Unit In Stock
+            </span> 
+            <input type="number" 
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product.units_in_stock} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Unit On Order
+            </span> 
+            <input type="number" min="1" max="15"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.units_on_order} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Reorder Level
+            </span> 
+            <input type="number" min="1" max="15"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100 
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.reorder_level} />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">          
+              Discontined
+            </span> 
+            <input type="number" min="1" max="15"
+              className="mt-1 block w-full rounded-md
+              border-transparent bg-gray-100
+              focus:border-gray-500 focus:bg-white focus:ring-0"
+              placeholder="" 
+              defaultValue={product?.discontinued} 
+              />
+          </label>
+        </div>
+
+        <div>
+          <Link to="edit" className="button">
+            Edit
+          </Link>
+          <Form method="post" action="destroy" onSubmit={(event) => {
+              // eslint-disable-next-line no-restricted-globals
+              if (!confirm('Please confirm you want to delete '+
+                           'this record.')) {
+                event.preventDefault()
+              }
+            }}
+          >
+            <button type="submit">Delete</button>
+          </Form>
+        </div>
+      </div>
       
-      <b>Recorder Level</b><br />
-      <input placeholder="Enter Reorder Level"
-        aria-label="reorderLevel" type="text"
-        name="reorderLevel" size="16" 
-        defaultValue={product.reorder_level} /><br />
-      
-      <b>Discontinued</b><br />
-      <input placeholder="Enter Discontinued"
-        aria-label="discontinued" type="text"
-        name="discontinued" size="10" 
-        defaultValue={product.discontinued} /><br />
-      <br />
-      <span>
-        <Link to="edit" className="button">
-          Edit
-        </Link>
-        <Form method="post" action="destroy"
-          onSubmit={(event) => {
-            // eslint-disable-next-line no-restricted-globals
-            if (!confirm('Please confirm you want to delete this record.')) {
-              event.preventDefault()
-            }
-          }}
-        >
-          <button type="submit">Delete</button>
-        </Form>
-      </span>
     </div>
   )
 }
