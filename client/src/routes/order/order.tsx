@@ -84,7 +84,8 @@ export default function Order() {
         defaultValue={order.employeeId} /><br />
         
       <b>Order Date</b><br />
-      <input placeholder="Enter Order Date"
+      <input type="date" class="mt-1 block w-full" 
+        placeholder="Enter Order Date"
         aria-label="orderDate" type="text"
         name="orderDate" size="14" 
         defaultValue={order.orderDate} /><br />
